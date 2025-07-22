@@ -1,0 +1,37 @@
+name: Release Kotlin Package
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'          # run only on version tags
+
+permissions:
+  contents: write         # create release & upload asset
+
+jobs:
+  release:
+    runs-on: ubuntu-latest      # Linux is fine for zipping the AAR package
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # Copy everything except workflow / git metadata into a temp dir
+      - name: Stage clean archive
+        run: |
+          mkdir release-dir
+          shopt -s extglob
+          cp -r !(release-dir|.git|.github) release-dir/
+
+      - name: Zip Kotlin package
+        run: zip -r polkabind-kotlin-pkg.zip release-dir
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: "Polkabind Kotlin Package ${{ github.ref_name }}"
+          tag_name: ${{ github.ref_name }}
+          files: polkabind-kotlin-pkg.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
