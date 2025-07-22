@@ -50,7 +50,7 @@ flowchart TD
   class CORE, KOT_REPO repo
   class CORE_CI, KOT_CI pipeline
   class D2 release
-  ```
+```
 
 # Show me the code
 
