@@ -1,1 +1,1 @@
-rootProject.name = "polkabind-android"
+rootProject.name = "polkabind-kotlin-pkg"
