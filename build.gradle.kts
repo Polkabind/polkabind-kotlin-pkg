@@ -1,5 +1,6 @@
 plugins {
   `maven-publish`
+  `java-library`
 }
 
 group = "com.github.Polkabind"
