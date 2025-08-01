@@ -87,11 +87,24 @@ Polkabind.doTransfer(
 Behind the scenes Polkabind executes the exact same Rust (left column) while exposing a single, idiomatic Kotlin API backed by coroutines.
 
 ## Integrating
+The package is published in [Jitpack](https://jitpack.io/#Polkabind/polkabind-kotlin-pkg) for more ease of use for developers. Just add the following config lines:
 
+### settings.gradle.kts
 ``` groovy
-repositories { mavenCentral() }            // or your own Maven repo
+dependencyResolutionManagement {
+    //
+    repositories {
+        //
+        maven { url = uri("https://jitpack.io") }
+        //
+    }
+}
+```
+
+### build.gradle.kts
+``` groovy
 dependencies {
-    implementation("dev.polkabind:polkabind-android:<version>")
+    implementation("com.github.Polkabind:polkabind-kotlin-pkg:v<latest-tag>")
 }
 ```
 
